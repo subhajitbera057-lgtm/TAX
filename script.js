@@ -86,15 +86,21 @@ function downloadPDF() {
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     }).save();
 }
-
-/* SAVE AS IMAGE (GALLERY) */
 function saveAsImage() {
     const invoice = document.querySelector(".invoice");
+    const buttons = document.querySelectorAll(".action-btn");
+
+    // hide buttons
+    buttons.forEach(btn => btn.style.display = "none");
 
     html2canvas(invoice, { scale: 2 }).then(canvas => {
         const link = document.createElement("a");
         link.download = "Tax_Invoice.jpg";
         link.href = canvas.toDataURL("image/jpeg", 0.95);
         link.click();
+
+        // show buttons again
+        buttons.forEach(btn => btn.style.display = "inline-block");
     });
 }
+
