@@ -1,106 +1,129 @@
-// Auto date
-document.getElementById("invoiceDate").value =
-    new Date().toISOString().split("T")[0];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tax Invoice</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-// INVOICE CALCULATION
-const qty = document.getElementById("qty");
-const amountEl = document.getElementById("amount");
-const totalEl = document.getElementById("total");
-const cgstEl = document.getElementById("cgst");
-const sgstEl = document.getElementById("sgst");
-const grandEl = document.getElementById("grand");
-const wordsEl = document.getElementById("words");
+<div class="invoice">
 
-const RATE = 0.30;
-const TAX = 0.14;
+    <!-- HEADER -->
+    <div class="header">
+        <div class="top-right">MOB NO: 9733833648</div>
 
-qty.addEventListener("input", calculate);
+        <h2>Tax Invoice</h2>
+        <h1>SUBHAS BIRI</h1>
+        <p><b>PROP: JAYANTA BERA</b></p>
+        <p>Vill_Raghubirchak, PO_Dhuliapur</p>
+        <p>Dist_Purba Medinipur, PIN_721634</p>
 
-function calculate(){
-    const q = Number(qty.value);
-    if(!q){ reset(); return; }
+        <div class="gst">GST NO: 19BEWPB1556H2Z6</div>
+    </div>
 
-    const amount = q * RATE;
-    const cgst = amount * TAX;
-    const sgst = amount * TAX;
-    const grand = amount + cgst + sgst;
+    <!-- INVOICE INFO -->
+    <div class="info">
+        <div>
+            Invoice No:
+            <input type="text" id="invoiceNo" placeholder="Invoice No">
+        </div>
+        <div>
+            Date:
+            <input type="date" id="invoiceDate">
+        </div>
+    </div>
 
-    amountEl.innerText = amount.toFixed(2);
-    totalEl.innerText = amount.toFixed(2);
-    cgstEl.innerText = cgst.toFixed(2);
-    sgstEl.innerText = sgst.toFixed(2);
-    grandEl.innerText = grand.toFixed(2);
+    <!-- BILL TO -->
+    <div class="bill">
+        <h3>Billed To</h3>
 
-    wordsEl.innerText = numberToWords(Math.floor(grand)) + " RUPEES";
-}
+        <p>
+            <b>Customer Name:</b>
+            <select id="customerSelect">
+                <option value="">-- Select Customer --</option>
+                <option value="TAPAN PAN STORES">TAPAN PAN STORES</option>
+                <option value="REGULAR STORES">REGULAR STORES</option>
+                <option value="MANAS STORES">MANAS STORES</option>
+                <option value="KAMAL PAN STORES">KAMAL PAN STORES</option>
+                <option value="T CORNER">T CORNER</option>
+            </select>
+        </p>
 
-function reset(){
-    amountEl.innerText =
-    totalEl.innerText =
-    cgstEl.innerText =
-    sgstEl.innerText =
-    grandEl.innerText = "0";
+        <p>
+            <b>Address:</b>
+            <select id="addressSelect">
+                <option value="">-- Select Address --</option>
+                <option value="RAMRAJATALA HOWRAH">RAMRAJATALA HOWRAH</option>
+                <option value="SHIBPUR HOWRAH">SHIBPUR HOWRAH</option>
+                <option value="SANTRAGACHI HOWRAH">SANTRAGACHI HOWRAH</option>
+                <option value="BAKSARA BAZAR">BAKSARA BAZAR</option>
+            </select>
+        </p>
+    </div>
 
-    wordsEl.innerText = "ZERO RUPEES";
-}
+    <!-- TABLE -->
+    <table>
+        <tr>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Rate</th>
+            <th>Amount</th>
+        </tr>
 
-// CUSTOMER → AUTO ADDRESS
-const customerSelect = document.getElementById("customerSelect");
-const addressSelect = document.getElementById("addressSelect");
+        <tr>
+            <td>H.M BIRI</td>
+            <td><input type="number" id="qty"></td>
+            <td>0.30</td>
+            <td id="amount">0</td>
+        </tr>
 
-const customerAddressMap = {
-    "TAPAN PAN STORES": "RAMRAJATALA HOWRAH",
-    "REGULAR STORES": "SHIBPUR HOWRAH",
-    "MANAS STORES": "SANTRAGACHI HOWRAH",
-    "KAMAL PAN STORES": "BAKSARA BAZAR",
-    "T CORNER": "RAMRAJATALA HOWRAH"
-};
+        <tr>
+            <td colspan="3" class="right">Total</td>
+            <td id="total">0</td>
+        </tr>
+        <tr>
+            <td colspan="3" class="right">CGST 14%</td>
+            <td id="cgst">0</td>
+        </tr>
+        <tr>
+            <td colspan="3" class="right">SGST 14%</td>
+            <td id="sgst">0</td>
+        </tr>
+        <tr>
+            <td colspan="3" class="right bold">Grand Total</td>
+            <td class="bold" id="grand">0</td>
+        </tr>
+    </table>
 
-customerSelect.addEventListener("change", ()=>{
-    addressSelect.value = customerAddressMap[customerSelect.value] || "";
-});
+    <!-- FOOTER -->
+    <div class="footer">
+        <div>
+            <p><b>Amount in words:</b></p>
+            <p id="words">ZERO RUPEES</p>
 
-// NUMBER TO WORDS
-function numberToWords(num){
-    const ones=["","ONE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","EIGHT","NINE",
-    "TEN","ELEVEN","TWELVE","THIRTEEN","FOURTEEN","FIFTEEN","SIXTEEN","SEVENTEEN","EIGHTEEN","NINETEEN"];
-    const tens=["","","TWENTY","THIRTY","FORTY","FIFTY","SIXTY","SEVENTY","EIGHTY","NINETY"];
+            <p>Bank: UNION BANK OF INDIA</p>
+            <p>Branch: Bhogpur Main Road</p>
+            <p>A/c No: 707501010050365</p>
+            <p>IFSC: UBIN0570753</p>
+        </div>
 
-    if(num===0) return "ZERO";
-    if(num<20) return ones[num];
-    if(num<100) return tens[Math.floor(num/10)] + (num%10?" "+ones[num%10]:"");
-    if(num<1000) return ones[Math.floor(num/100)]+" HUNDRED"+(num%100?" "+numberToWords(num%100):"");
-    if(num<100000) return numberToWords(Math.floor(num/1000))+" THOUSAND"+(num%1000?" "+numberToWords(num%1000):"");
-    if(num<10000000) return numberToWords(Math.floor(num/100000))+" LAKH"+(num%100000?" "+numberToWords(num%100000):"");
-    return numberToWords(Math.floor(num/10000000))+" CRORE";
-}
-/* DOWNLOAD PDF */
-function downloadPDF() {
-    const invoice = document.querySelector(".invoice");
+        <div class="sign">
+            <p>SUBHAS BIRI</p>
+            <b>Authorised Signature</b>
+        </div>
+    </div>
 
-    html2pdf().from(invoice).set({
-        margin: 0,
-        filename: 'Tax_Invoice.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    }).save();
-}
-function saveAsImage() {
-    const invoice = document.querySelector(".invoice");
-    const buttons = document.querySelectorAll(".action-btn");
+    <button class="print-btn action-btn" onclick="window.print()">Print</button>
+<button class="print-btn action-btn" onclick="downloadPDF()">Download PDF</button>
+<button class="print-btn action-btn" onclick="saveAsImage()">Save to Gallery</button>
 
-    // hide buttons
-    buttons.forEach(btn => btn.style.display = "none");
 
-    html2canvas(invoice, { scale: 2 }).then(canvas => {
-        const link = document.createElement("a");
-        link.download = "Tax_Invoice.jpg";
-        link.href = canvas.toDataURL("image/jpeg", 0.95);
-        link.click();
+</div>
 
-        // show buttons again
-        buttons.forEach(btn => btn.style.display = "inline-block");
-    });
-}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
+<script src="script.js"></script>
+</body>
+</html>
