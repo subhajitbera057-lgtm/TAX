@@ -74,17 +74,37 @@ function numberToWords(num){
     if(num<10000000) return numberToWords(Math.floor(num/100000))+" LAKH"+(num%100000?" "+numberToWords(num%100000):"");
     return numberToWords(Math.floor(num/10000000))+" CRORE";
 }
-/* DOWNLOAD PDF */
 function downloadPDF() {
     const invoice = document.querySelector(".invoice");
+    const buttons = document.querySelectorAll(".action-btn");
 
-    html2pdf().from(invoice).set({
-        margin: 0,
-        filename: 'Tax_Invoice.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    }).save();
+    // hide buttons
+    buttons.forEach(btn => btn.style.visibility = "hidden");
+
+    // enable pdf mode
+    document.documentElement.classList.add("pdf-mode");
+
+    setTimeout(() => {
+        html2pdf().from(invoice).set({
+            margin: 0,
+            filename: 'Tax_Invoice.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: {
+                scale: 1,
+                scrollY: 0,
+                windowHeight: invoice.scrollHeight
+            },
+            jsPDF: {
+                unit: 'mm',
+                format: 'a4',
+                orientation: 'portrait'
+            }
+        }).save().then(() => {
+            // restore UI
+            document.documentElement.classList.remove("pdf-mode");
+            buttons.forEach(btn => btn.style.visibility = "visible");
+        });
+    }, 100);
 }
 
 function saveAsImage() {
