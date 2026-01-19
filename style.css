@@ -128,3 +128,22 @@ input{
         margin:0;
     }
 }
+.invoice {
+    page-break-inside: avoid;
+}
+
+table, tr, td, th {
+    page-break-inside: avoid;
+}
+/* PDF MODE FIX */
+.pdf-mode body {
+    margin: 0;
+    padding: 0;
+}
+
+.pdf-mode .invoice {
+    margin: 0;
+    padding: 15mm;
+    min-height: auto;     /* 🔥 KEY LINE */
+    width: 210mm;
+}
