@@ -42,20 +42,20 @@ function reset(){
 }
 
 // CUSTOMER → ADDRESS
-const customerSelect = document.getElementById("customerSelect");
-const addressSelect = document.getElementById("addressSelect");
+// const customerSelect = document.getElementById("customerSelect");
+// const addressSelect = document.getElementById("addressSelect");
 
-const map = {
-    "TAPAN PAN STORES":"RAMRAJATALA HOWRAH",
-    "REGULAR STORES":"SHIBPUR HOWRAH",
-    "MANAS STORES":"SANTRAGACHI HOWRAH",
-    "KAMAL PAN STORES":"BAKSARA BAZAR",
-    "T CORNER":"RAMRAJATALA HOWRAH"
-};
+// const map = {
+//     "TAPAN PAN STORES":"RAMRAJATALA HOWRAH",
+//     "REGULAR STORES":"SHIBPUR HOWRAH",
+//     "MANAS STORES":"SANTRAGACHI HOWRAH",
+//     "KAMAL PAN STORES":"BAKSARA BAZAR",
+//     "T CORNER":"RAMRAJATALA HOWRAH"
+// };
 
-customerSelect.addEventListener("change", ()=>{
-    addressSelect.innerHTML = `<option>${map[customerSelect.value] || ""}</option>`;
-});
+// customerSelect.addEventListener("change", ()=>{
+//     addressSelect.innerHTML = `<option>${map[customerSelect.value] || ""}</option>`;
+// });
 
 // NUMBER TO WORDS
 function numberToWords(num){
