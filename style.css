@@ -20,8 +20,17 @@ body{
     padding:15px;
 }
 
-.top-right{ position:absolute; right:15px; top:10px; }
-.gst{ position:absolute; right:15px; bottom:10px; }
+.top-right{
+    position:absolute;
+    right:15px;
+    top:10px;
+}
+
+.gst{
+    position:absolute;
+    right:15px;
+    bottom:10px;
+}
 
 .info{
     display:flex;
@@ -31,7 +40,9 @@ body{
     margin-top:10px;
 }
 
-.bill{ margin-top:15px; }
+.bill{
+    margin-top:15px;
+}
 
 .bill select{
     width:100%;
@@ -91,4 +102,9 @@ button{
 
 @media print{
     button{ display:none; }
+}
+@media print {
+    .actions {
+        display: none;
+    }
 }
