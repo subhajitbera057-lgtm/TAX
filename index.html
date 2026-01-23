@@ -30,8 +30,7 @@
         </div>
         <div>
             Date:
-           <input type="text" id="date" placeholder="DD/MM/YYYY">
-<p id="out"></p>
+       <input type="text" id="date" placeholder="DD/MM/YYYY">
 
         </div>
     </div>
@@ -50,10 +49,6 @@
 
         <select id="addressSelect">
             <option value="">-- Address --</option>
-            <option value="RAMRAJATALA HOWRAH">RAMRAJATALA HOWRAH</option>
-            <option value="SHIBPUR HOWRAH">SHIBPUR HOWRAH</option>
-            <option value="SANTRAGACHI HOWRAH">SANTRAGACHI HOWRAH</option>
-            <option value="BAKSARA BAZAR">BAKSARA BAZAR</option>
         </select>
     </div>
 
@@ -69,28 +64,28 @@
         <tr>
             <td>H.M BIRI</td>
             <td class="qty-cell">
-                <input type="number" id="qty">
+                <input type="number" id="qty" min="0">
                 <span>PCS</span>
             </td>
             <td>0.30</td>
-            <td id="amount">0</td>
+            <td id="amount">0.00</td>
         </tr>
 
         <tr>
             <td colspan="3" class="right">Total</td>
-            <td id="total">0</td>
+            <td id="total">0.00</td>
         </tr>
         <tr>
             <td colspan="3" class="right">CGST 14%</td>
-            <td id="cgst">0</td>
+            <td id="cgst">0.00</td>
         </tr>
         <tr>
             <td colspan="3" class="right">SGST 14%</td>
-            <td id="sgst">0</td>
+            <td id="sgst">0.00</td>
         </tr>
         <tr>
             <td colspan="3" class="right bold">Grand Total</td>
-            <td class="bold" id="grand">0</td>
+            <td class="bold" id="grand">0.00</td>
         </tr>
     </table>
 
@@ -115,7 +110,7 @@
     <div class="actions">
         <button onclick="window.print()">Print</button>
         <button onclick="downloadPDF()">Download PDF</button>
-        <button onclick="saveAsImage()">Save to Gallery</button>
+        <button onclick="saveAsImage()">Save Image</button>
     </div>
 
 </div>
