@@ -1,6 +1,3 @@
-
-
-// CALCULATION
 const qty = document.getElementById("qty");
 const amountEl = document.getElementById("amount");
 const totalEl = document.getElementById("total");
@@ -14,7 +11,11 @@ const TAX = 0.14;
 
 qty.addEventListener("input", () => {
     const q = Number(qty.value);
-    if(!q){ reset(); return; }
+
+    if (q <= 0) {
+        reset();
+        return;
+    }
 
     const amount = q * RATE;
     const cgst = amount * TAX;
@@ -35,7 +36,8 @@ function reset(){
     totalEl.innerText =
     cgstEl.innerText =
     sgstEl.innerText =
-    grandEl.innerText = "0";
+    grandEl.innerText = "0.00";
+
     wordsEl.innerText = "ZERO RUPEES";
 }
 
@@ -52,7 +54,7 @@ const map = {
 };
 
 customerSelect.addEventListener("change", ()=>{
-    addressSelect.value = map[customerSelect.value] || "";
+    addressSelect.innerHTML = `<option>${map[customerSelect.value] || ""}</option>`;
 });
 
 // NUMBER TO WORDS
@@ -69,9 +71,9 @@ function numberToWords(num){
     return numberToWords(Math.floor(num/10000000))+" CRORE";
 }
 
-// SAVE AS IMAGE
+// SAVE IMAGE
 function saveAsImage(){
-    html2canvas(document.getElementById("invoice"), {scale:2}).then(canvas=>{
+    html2canvas(document.getElementById("invoice"),{scale:2}).then(canvas=>{
         const link=document.createElement("a");
         link.download="invoice.jpg";
         link.href=canvas.toDataURL("image/jpeg",0.95);
@@ -83,6 +85,29 @@ function saveAsImage(){
 function downloadPDF(){
     html2pdf().from(document.getElementById("invoice")).save("invoice.pdf");
 }
-const date = document.querySelector("#date");
-const out = document.querySelector("#out");
+const dateInput = document.getElementById("date");
 
+dateInput.addEventListener("input", () => {
+    let v = dateInput.value.replace(/\D/g, "").slice(0, 8);
+
+    if (v.length >= 5)
+        dateInput.value = `${v.slice(0,2)}/${v.slice(2,4)}/${v.slice(4)}`;
+    else if (v.length >= 3)
+        dateInput.value = `${v.slice(0,2)}/${v.slice(2)}`;
+    else
+        dateInput.value = v;
+});
+function saveAsImage(){
+    const actions = document.querySelector(".actions");
+    actions.style.display = "none";   // hide buttons
+
+    html2canvas(document.getElementById("invoice"), { scale: 2 })
+    .then(canvas => {
+        const link = document.createElement("a");
+        link.download = "invoice.jpg";
+        link.href = canvas.toDataURL("image/jpeg", 0.95);
+        link.click();
+
+        actions.style.display = "block"; // show buttons back
+    });
+}
