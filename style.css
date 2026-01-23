@@ -1,4 +1,4 @@
-*{ box-sizing:border-box; }
+*{ box-sizing: border-box; }
 
 body{
     background:#dcdfe6;
@@ -7,14 +7,12 @@ body{
 
 .invoice{
     width:210mm;
-    min-height:297mm;
     margin:10mm auto;
     background:#fff;
     padding:15mm;
     border:1px solid #000;
 }
 
-/* HEADER */
 .header{
     background:#e6ebf3;
     text-align:center;
@@ -22,30 +20,9 @@ body{
     padding:15px;
 }
 
-.header h1{
-    margin:5px 0;
-    font-size:32px;
-    color:#1f2f57;
-}
+.top-right{ position:absolute; right:15px; top:10px; }
+.gst{ position:absolute; right:15px; bottom:10px; }
 
-.header h2{
-    margin:0;
-    color:#1f2f57;
-}
-
-.top-right{
-    position:absolute;
-    top:10px;
-    right:15px;
-}
-
-.gst{
-    position:absolute;
-    right:15px;
-    bottom:10px;
-}
-
-/* INFO */
 .info{
     display:flex;
     justify-content:space-between;
@@ -54,25 +31,14 @@ body{
     margin-top:10px;
 }
 
-.info input{
-    border:none;
-    border-bottom:1px solid #000;
-    background:transparent;
-}
-
-/* BILL */
-.bill{
-    margin-top:15px;
-}
+.bill{ margin-top:15px; }
 
 .bill select{
     width:100%;
+    margin:5px 0;
     padding:6px;
-    border:1px solid #000;
-    font-family:"Times New Roman", serif;
 }
 
-/* TABLE */
 table{
     width:100%;
     border-collapse:collapse;
@@ -85,21 +51,22 @@ th, td{
     text-align:center;
 }
 
-th{
-    background:#f0f2f7;
-}
-
 .right{ text-align:right; }
 .bold{ font-weight:bold; }
 
-/* INPUT */
-input{
-    width:120px;
-    padding:5px;
-    text-align:center;
+.qty-cell{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
 }
 
-/* FOOTER */
+#qty{
+    width:150px;
+    padding:6px;
+    font-size:16px;
+}
+
 .footer{
     display:flex;
     justify-content:space-between;
@@ -111,39 +78,17 @@ input{
     text-align:center;
 }
 
-/* PRINT */
-.print-btn{
+.actions{
     margin-top:20px;
+    text-align:center;
+}
+
+button{
     padding:8px 20px;
-    border:1px solid #000;
-    background:#e6ebf3;
+    margin:5px;
     cursor:pointer;
 }
 
 @media print{
-    body{ background:none; }
-    .print-btn{ display:none; }
-    @page{
-        size:A4;
-        margin:0;
-    }
-}
-.invoice {
-    page-break-inside: avoid;
-}
-
-table, tr, td, th {
-    page-break-inside: avoid;
-}
-/* PDF MODE FIX */
-.pdf-mode body {
-    margin: 0;
-    padding: 0;
-}
-
-.pdf-mode .invoice {
-    margin: 0;
-    padding: 15mm;
-    min-height: auto;     /* 🔥 KEY LINE */
-    width: 210mm;
+    button{ display:none; }
 }
