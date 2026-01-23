@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<div class="invoice">
+<div class="invoice" id="invoice">
 
     <!-- HEADER -->
     <div class="header">
@@ -22,44 +22,39 @@
         <div class="gst">GST NO: 19BEWPB1556H2Z6</div>
     </div>
 
-    <!-- INVOICE INFO -->
+    <!-- INFO -->
     <div class="info">
         <div>
             Invoice No:
-            <input type="text" id="invoiceNo" placeholder="Invoice No">
+            <input type="text">
         </div>
         <div>
             Date:
-            <input type="date" id="invoiceDate">
+           <input type="text" id="date" placeholder="DD/MM/YYYY">
+<p id="out"></p>
+
         </div>
     </div>
 
-    <!-- BILL TO -->
+    <!-- BILL -->
     <div class="bill">
         <h3>Billed To</h3>
+        <select id="customerSelect">
+            <option value="">-- Select Customer --</option>
+            <option value="TAPAN PAN STORES">TAPAN PAN STORES</option>
+            <option value="REGULAR STORES">REGULAR STORES</option>
+            <option value="MANAS STORES">MANAS STORES</option>
+            <option value="KAMAL PAN STORES">KAMAL PAN STORES</option>
+            <option value="T CORNER">T CORNER</option>
+        </select>
 
-        <p>
-            <b>Customer Name:</b>
-            <select id="customerSelect">
-                <option value="">-- Select Customer --</option>
-                <option value="TAPAN PAN STORES">TAPAN PAN STORES</option>
-                <option value="REGULAR STORES">REGULAR STORES</option>
-                <option value="MANAS STORES">MANAS STORES</option>
-                <option value="KAMAL PAN STORES">KAMAL PAN STORES</option>
-                <option value="T CORNER">T CORNER</option>
-            </select>
-        </p>
-
-        <p>
-            <b>Address:</b>
-            <select id="addressSelect">
-                <option value="">-- Select Address --</option>
-                <option value="RAMRAJATALA HOWRAH">RAMRAJATALA HOWRAH</option>
-                <option value="SHIBPUR HOWRAH">SHIBPUR HOWRAH</option>
-                <option value="SANTRAGACHI HOWRAH">SANTRAGACHI HOWRAH</option>
-                <option value="BAKSARA BAZAR">BAKSARA BAZAR</option>
-            </select>
-        </p>
+        <select id="addressSelect">
+            <option value="">-- Address --</option>
+            <option value="RAMRAJATALA HOWRAH">RAMRAJATALA HOWRAH</option>
+            <option value="SHIBPUR HOWRAH">SHIBPUR HOWRAH</option>
+            <option value="SANTRAGACHI HOWRAH">SANTRAGACHI HOWRAH</option>
+            <option value="BAKSARA BAZAR">BAKSARA BAZAR</option>
+        </select>
     </div>
 
     <!-- TABLE -->
@@ -73,7 +68,10 @@
 
         <tr>
             <td>H.M BIRI</td>
-            <td><input type="number" id="qty"></td>
+            <td class="qty-cell">
+                <input type="number" id="qty">
+                <span>PCS</span>
+            </td>
             <td>0.30</td>
             <td id="amount">0</td>
         </tr>
@@ -103,7 +101,6 @@
             <p id="words">ZERO RUPEES</p>
 
             <p>Bank: UNION BANK OF INDIA</p>
-            <p>Branch: Bhogpur Main Road</p>
             <p>A/c No: 707501010050365</p>
             <p>IFSC: UBIN0570753</p>
         </div>
@@ -114,16 +111,17 @@
         </div>
     </div>
 
-<button class="print-btn action-btn" onclick="window.print()">Print</button>
-<button class="print-btn action-btn" onclick="downloadPDF()">Download PDF</button>
-<button class="print-btn action-btn" onclick="saveAsImage()">Save to Gallery</button>
-
+    <!-- BUTTONS -->
+    <div class="actions">
+        <button onclick="window.print()">Print</button>
+        <button onclick="downloadPDF()">Download PDF</button>
+        <button onclick="saveAsImage()">Save to Gallery</button>
+    </div>
 
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
 <script src="script.js"></script>
 </body>
 </html>
