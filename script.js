@@ -7,7 +7,7 @@ const grandEl = document.getElementById("grand");
 const wordsEl = document.getElementById("words");
 
 const RATE = 0.30;
-const TAX = 0.14;
+const TAX = 0.09;
 
 qty.addEventListener("input", () => {
     const q = Number(qty.value);
