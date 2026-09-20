@@ -9,7 +9,7 @@ const wordsEl = document.getElementById("words");
 const dateInput = document.getElementById("date");
 
 // ================= CONSTANTS =================
-const RATE = 0.30;      // price per unit
+const RATE = 0.40;      // price per unit
 const CGST_RATE = 0.09; // 9%
 const SGST_RATE = 0.09; // 9%
 
